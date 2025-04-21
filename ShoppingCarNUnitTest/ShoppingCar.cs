@@ -23,12 +23,17 @@
         public void RemoveItem(string item)
         {
             // excepción a la fuerza para probar el test unitario RemoveItem_ItemIsNotInCar_ThrowsArgumentException
+            if (!Items.Contains(item))
+            {
+                throw new ArgumentException("El artículo no está en el carrito.");
+            }
             Items.Remove(item);
         }
 
         public void ClearCar()
         {
             Items.Clear();
+            Prices.Clear();
         }
         
         public void AddPrice(int price)
