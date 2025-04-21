@@ -12,6 +12,61 @@ public class Tests
         _shoppingCar = new ShoppingCar();
     }
 
+	/*Integral testing*/
+    [Test]
+    public void AddItemAndPrice_ItemIsValid_AddsItemAndPriceToCar()
+    {
+        // Arrange
+        string item = "Manzana";
+        int price = 10;
+        
+        // Act
+        _shoppingCar.AddItem(item);
+        _shoppingCar.AddPrice(price);
+        
+        // Assert
+        Assert.Contains(item, _shoppingCar.Items);
+        Assert.Contains(price, _shoppingCar.Prices);
+    }
+    
+    [Test]
+    public void RemoveItemAndPrice_ItemIsValid_RemovesItemAndPriceFromCar()
+    {
+        // Arrange
+        string item = "Manzana";
+        int price = 10;
+        
+        _shoppingCar.AddItem(item);
+        _shoppingCar.AddPrice(price);
+        
+        // Act
+        _shoppingCar.RemoveItem(item);
+        _shoppingCar.RemovePrice(price);
+        
+        // Assert
+        Assert.IsFalse(_shoppingCar.Items.Contains(item));
+        Assert.IsFalse(_shoppingCar.Prices.Contains(price));
+    }
+    
+    [Test]
+    public void ClearCar_CarIsNotEmpty_ClearsAllItemsAndPrices()
+    {
+        // Arrange
+        string item = "Manzana";
+        int price = 10;
+        
+        _shoppingCar.AddItem(item);
+        _shoppingCar.AddPrice(price);
+        
+        // Act
+        _shoppingCar.ClearCar();
+        
+        // Assert
+        Assert.IsEmpty(_shoppingCar.Items);
+        Assert.IsEmpty(_shoppingCar.Prices);
+    }
+
+	/*Unit testing*/
     [Test]
     //[metodo]_[condicion]_[resultado esperado]
     public void AddItem_ItemIsEmpty_ThrowsArgumentException()
